@@ -3,16 +3,24 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+template<class InputIterator, class OutputIterator>
+OutputIterator copy (InputIterator first, InputIterator last, OutputIterator result)
+{
+    while (first!=last) {
+        *result = *first;
+        ++result; 
+        ++first;
+    }
+  return result;
+}
+
 void merge(int* a, const int& n, int* b, const int& m, int* c)
 {
-    int ai = 0, bi = 0;
-    for (int i = 0; i < n+m; i++)
-    {
-        if (ai == n) c[i] = b[bi++];
-        else if (bi == m) c[i] = a[ai++];
-        else if (a[ai] < b[bi]) c[i] = a[ai++];
-        else c[i] = b[bi++];
-    }
+    int *pa = a, *pb = b, *pc = c;
+    while(pa < a+n && pb < b+m)
+        *pc++ = (*pa < *pb)? *pa++ : *pb++;
+    copy(pa, a + n, pc);
+    copy(pb, b + m, pc);
 }
 
 int main (){

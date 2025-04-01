@@ -4,7 +4,7 @@ using namespace std;
 
 int Partition(int64_t ar[], int head, int tail)
 {
-    int pivot = ar[tail];
+    int64_t pivot = ar[tail];
     int j = head - 1;
     for (int i = head; i <= tail - 1; i++){
         if (ar[i] < pivot){
